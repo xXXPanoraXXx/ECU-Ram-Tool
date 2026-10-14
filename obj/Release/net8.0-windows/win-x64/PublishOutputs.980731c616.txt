@@ -1,0 +1,4 @@
+C:\IdeaProjects\EcuRamTool\bin\Release\net8.0-windows\win-x64\publish\EcuRamTool.pdb
+C:\IdeaProjects\EcuRamTool\bin\Release\net8.0-windows\win-x64\publish\Profiles\ME7_C167.json
+C:\IdeaProjects\EcuRamTool\bin\Release\net8.0-windows\win-x64\publish\Profiles\ME7_ST10M275.json
+C:\IdeaProjects\EcuRamTool\bin\Release\net8.0-windows\win-x64\publish\EcuRamTool.exe

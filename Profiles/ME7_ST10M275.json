@@ -1,0 +1,84 @@
+{
+  "name": "ME7.1.1 ST10 / DDLI $2C-$21",
+  "baudRate": 10400,
+  "dataBits": 8,
+  "parity": "None",
+  "stopBits": "One",
+  "targetAddresses": [
+    "0x10"
+  ],
+  "testerAddress": "0xF1",
+  "ramReadMethod": "DDLI21",
+  "init": {
+    "mode": "FAST",
+    "preOpenDelayMs": 200,
+    "fastInitHighBeforeMs": 2600,
+    "fastInitLowMs": 23,
+    "fastInitHighAfterMs": 26,
+    "afterConnectDelayMs": 0,
+    "reinitializeForEachTarget": true,
+    "delayBetweenTargetAttemptsMs": 300
+  },
+  "timing": {
+    "echoTimeoutMs": 500,
+    "startCommunicationTimeoutMs": 6000,
+    "defaultResponseTimeoutMs": 3000,
+    "readMemoryTimeoutMs": 3000,
+    "keepAliveIntervalMs": 1800,
+    "watchRefreshIntervalMs": 750,
+    "interByteIdleMs": 20,
+    "serialWriteTimeoutMs": 1000,
+    "serialPollSleepMs": 1
+  },
+  "commands": {
+    "startCommunication": "81 {target} {tester} 81 {checksum}",
+    "testerPresent": "81 {target} {tester} 3E {checksum}",
+    "developmentSession": "82 {target} {tester} 10 86 {checksum}",
+    "readMemoryByAddress": "85 {target} {tester} 23 {addr3} {addr2} {addr1} {len} {checksum}",
+    "positiveStartContains": [
+      "C1"
+    ],
+    "positiveDevelopmentContains": [
+      "50 86"
+    ],
+    "positiveTesterPresentContains": [
+      "7E"
+    ],
+    "positiveReadMemoryContains": [
+      "63"
+    ],
+    "writeMemoryByAddress": "{auto}",
+    "positiveWriteMemoryContains": [
+      "7B"
+    ]
+  },
+  "ddli": {
+    "localIdentifier": "0xF1",
+    "commandPauseMs": 30,
+    "fillFailedBlocks": true,
+    "failedFillByte": "0xFF"
+  },
+  "memoryRanges": [
+    {
+      "name": "ST10 RAM 0x00E000-0x00E0FF via DDLI21",
+      "addressPrefix": "0x00",
+      "start": "0xE000",
+      "end": "0xE0FF",
+      "readSize": 32,
+      "readMethod": "DDLI21",
+      "mode": "bits",
+      "writeMethod": "DDLI3B"
+    },
+    {
+      "name": "FDxx Statusbits RAM 0x00FD00-0x00FDFF via DDLI21",
+      "addressPrefix": "0x00",
+      "start": "0xFD00",
+      "end": "0xFDFF",
+      "readSize": 32,
+      "readMethod": "DDLI21",
+      "mode": "bits",
+      "writeMethod": "DDLI3B"
+    }
+  ],
+  "ramWriteMethod": "DDLI3B"
+}

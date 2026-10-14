@@ -1,0 +1,96 @@
+{
+  "name": "ME7 C167 / ME7.5 KWP2000",
+  "baudRate": 10400,
+  "dataBits": 8,
+  "parity": "None",
+  "stopBits": "One",
+  "targetAddresses": [
+    "0x11", 
+	"0x10",
+	"0x01"
+  ],
+  "testerAddress": "0xF1",
+  "ramReadMethod": "23",
+  "init": {
+    "mode": "FAST",
+    "preOpenDelayMs": 200,
+    "fastInitHighBeforeMs": 2600,
+    "fastInitLowMs": 23,
+    "fastInitHighAfterMs": 26,
+    "afterConnectDelayMs": 0,
+    "reinitializeForEachTarget": true,
+    "delayBetweenTargetAttemptsMs": 300
+  },
+  "timing": {
+    "echoTimeoutMs": 500,
+    "startCommunicationTimeoutMs": 6000,
+    "defaultResponseTimeoutMs": 3000,
+    "readMemoryTimeoutMs": 10000,
+    "keepAliveIntervalMs": 1800,
+    "watchRefreshIntervalMs": 750,
+    "interByteIdleMs": 20,
+    "serialWriteTimeoutMs": 1000,
+    "serialPollSleepMs": 1
+  },
+  "commands": {
+    "startCommunication": "81 {target} {tester} 81 {checksum}",
+    "testerPresent": "81 {target} {tester} 3E {checksum}",
+    "developmentSession": "82 {target} {tester} 10 86 {checksum}",
+    "readMemoryByAddress": "85 {target} {tester} 23 {addr3} {addr2} {addr1} {len} {checksum}",
+    "positiveStartContains": [
+      "C1"
+    ],
+    "positiveDevelopmentContains": [
+      "50 86"
+    ],
+    "positiveTesterPresentContains": [
+      "7E"
+    ],
+    "positiveReadMemoryContains": [
+      "63"
+    ],
+    "writeMemoryByAddress": "87 {target} {tester} 3D {addr3} {addr2} {addr1} {len} {data} {checksum}",
+    "positiveWriteMemoryContains": [
+      "7D"
+    ]
+  },
+  "ddli": {
+    "localIdentifier": "0xF1",
+    "commandPauseMs": 30,
+    "fillFailedBlocks": true,
+    "failedFillByte": "0xFF"
+  },
+  "memoryRanges": [
+    {
+      "name": "FDxx Statusbits RAM 0x00FD00-0x00FDFF via $23/$3D",
+      "addressPrefix": "0x00",
+      "start": "0xFD00",
+      "end": "0xFDFF",
+      "readSize": 2,
+      "readMethod": "23",
+      "writeMethod": "3D",
+      "mode": "bits"
+    },
+    {
+      "name": "F8xx RAM 0x00F800-0x00F8FF via $23/$3D",
+      "addressPrefix": "0x00",
+      "start": "0xF800",
+      "end": "0xF8FF",
+      "readSize": 2,
+      "readMethod": "23",
+      "writeMethod": "3D",
+      "mode": "bits"
+    },
+    {
+      "name": "External RAM 0x380000-0x387FFF via $23/$3D",
+      "addressPrefix": "0x38",
+      "start": "0x0000",
+      "end": "0x7FFF",
+      "readSize": 2,
+      "readMethod": "23",
+      "writeMethod": "3D",
+      "mode": "bits"
+    }
+  ],
+  "ramWriteMethod": "3D"
+}
